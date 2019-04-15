@@ -6,16 +6,18 @@
  * 
  */
 
+//  Include low power library.
+#include "LowPower.h"
+
 #define MOISTURE_PIN A0
-#define MOISTURE_PERMS 1500
+#define MOISTURE_PERMS 0
 
-#define MONITOR_PERMS 1500
+#define MONITOR_PERMS 0
 
-#define WATERING_PIN 4
-#define WATERING_PERMS 3000
+#define WATERING_PIN 13
+#define WATERING_PERMS 0
 #define WATERING_LEVEL 1000
-#define WATERING_DURATION 12000
-//===============================MyFunctions
+#define WATERING_DURATION 0
 
 //===============================analogInput
 
@@ -122,6 +124,7 @@ void setup() {
 }
 
 void loop() {
+    LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);     //  Sleep the controler.
     unsigned long currms = millis();
     loop_analogInput(moistureSensor, currms);    
     loop_digitalOut(pomp, moistureSensor, currms);
